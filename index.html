@@ -769,6 +769,7 @@
         document.getElementById('btn-' + tabId).classList.remove('text-slate-500');
         if (tabId === 'market') renderMarketAssets();
         if (tabId === 'perf')   navigatePerf('inversion');
+        if (tabId === 'intel')  blurIntelImages();
     }
 
     function applyCanvasBlur(img, blurPx) {
@@ -795,6 +796,13 @@
 
     function blurInversionImages() {
         document.querySelectorAll('#perf-panel-inversion img').forEach(img => applyCanvasBlur(img, 4));
+    }
+
+    function blurIntelImages() {
+        document.querySelectorAll('#view-intel img').forEach(img => {
+            if (img.src && img.src.includes('HLTV.png')) return;
+            applyCanvasBlur(img, 20);
+        });
     }
 
     function navigatePerf(tabId) {
